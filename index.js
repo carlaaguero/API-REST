@@ -1,5 +1,7 @@
 const express = require('express');
 const app = express();
+const registerController = require( './controllers/register.js' );
+app.use(express.json());
 
 
 app.get('/test', (req,res) => {
@@ -9,7 +11,7 @@ app.get('/test', (req,res) => {
     console.log('Han llamado a /test')
 });
 
-
+app.post( '/register', registerController );
 
 app.listen (3000, () => {
     console.log("Servidor escuchando");
