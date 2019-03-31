@@ -7,14 +7,12 @@ module.exports = ( req, res ) => {
     const data = JSON.parse( dataString);
     const { username, email, password } = req.body;
 
-    console.log(req.body);
-
+    // Filters
     const isValidBody = username != undefined && password != undefined && email != undefined;
     const isvalidPassword = password.length > 5;
     const isValidEmail = validator.isEmail (email);
     const usernameExists = data.users.find( user => user.username === username);
     const emailExists = data.users.find( user => user.email === email);
-    
 
     if (!isValidBody) {
         res.status( 400 ).json( { message: 'necesitamos un body con las propiedades username, email y password' } )
@@ -31,9 +29,7 @@ module.exports = ( req, res ) => {
     } else if(emailExists) {
         res.status( 400 ).json( { message: 'Ya existe un usuario con ese email. Puede logearse' } )
         return;
-    }
-    
-    else {
+    } else {
         const newUser = {
             id: id(),
             username,
@@ -44,7 +40,6 @@ module.exports = ( req, res ) => {
         data.users.push( newUser);
         const outputString = JSON.stringify ( data );
         fs.writeFileSync ( './db.json', outputString )
-    
         res.status ( 201 ).json ( {data: 'created!'});
     }
 }
