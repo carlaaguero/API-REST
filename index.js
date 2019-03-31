@@ -2,14 +2,15 @@ const express = require('express');
 const app = express();
 
 
-app.get('/longin', (req,res) => {
-    res.json ({primeraprueba:'EL SERVIDOR ESTÁ FUNCIONANDO'})
+app.get('/test', (req,res) => {
+    res.json ({
+        primeraprueba: 'EL SERVIDOR ESTÁ FUNCIONANDO'
+    });
+    console.log('Han llamado a /test')
 });
 
-app.get('')
 
 
-
-app.listen (3000, ()=>{
+app.listen (3000, () => {
     console.log("Servidor escuchando");
 })
